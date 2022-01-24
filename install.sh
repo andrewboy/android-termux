@@ -28,4 +28,7 @@ chsh -s /data/data/com.termux/files/usr/bin/fish
 
 #neofetch
 pkg install neofetch
+#enable neofetch in fish terminal
+cp custom.fish $HOME/.config/fish/conf.d/
 # run at termux start => ~/.config/fish/config.fish
+#if ! grep -Fxq "alias pbcopy='xclip -selection clipboard'" ~/.config/fish/config.fish; then echo 1; else echo 0; fi
