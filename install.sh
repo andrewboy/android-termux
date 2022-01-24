@@ -43,3 +43,7 @@ pkg install neofetch
 cp custom.fish $HOME/.config/fish/conf.d/
 # run at termux start => ~/.config/fish/config.fish
 #if ! grep -Fxq "alias pbcopy='xclip -selection clipboard'" ~/.config/fish/config.fish; then echo 1; else echo 0; fi
+
+# INSTALL PROGRAMS =============================================================
+
+pkg update -y && pkg install mc -y && pkg install openssh -y
