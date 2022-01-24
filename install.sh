@@ -1,4 +1,13 @@
 #!/bin/bash
+
+# TERMUX CONFIG ================================================================
+
+#termux config
+cp termux.properties $HOME/.termux/
+termux-reload-settings
+
+# TERMUX URL OPENER ============================================================
+
 #Clean Install
 rm -f "/data/data/com.termux/files/home/bin/termux-url-opener"
 mkdir /data/data/com.termux/files/home/bin
@@ -11,6 +20,8 @@ yes | pip install youtube-dl
 cp termux-url-opener $HOME/bin/
 chmod +x "$HOME/bin/termux-url-opener"
 termux-setup-storage
+
+# FISH =========================================================================
 
 #fish + config
 pkg install fish
