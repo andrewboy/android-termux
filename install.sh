@@ -33,7 +33,7 @@ pkg install fish
 #mv PowerlineSymbols.otf ~/.fonts/
 #mkdir -p ~/.config/fontconfig/conf.d
 #mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-omf install lambda
+fish -c "omf install lambda"
 #launch on termux start
 chsh -s /data/data/com.termux/files/usr/bin/fish
 
