@@ -19,7 +19,7 @@ yes | pip install youtube-dl
 #Installing the script
 cp termux-url-opener $HOME/bin/
 chmod +x "$HOME/bin/termux-url-opener"
-termux-setup-storage
+termux-setup-storage -y
 
 # FISH =========================================================================
 
