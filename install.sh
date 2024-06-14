@@ -21,7 +21,7 @@ termux-reload-settings
 
 # PKG ==========================================================================
 
-pkg install -y fastfetch bat eza nodejs-lts php mc openssh git nala python python-pip
+pkg install -y fastfetch bat eza nodejs-lts php mc openssh git nala python python-pip wget
 #neovim
 
 # TERMUX URL OPENER ============================================================
