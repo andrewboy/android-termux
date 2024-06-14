@@ -5,7 +5,7 @@
 termux_root="/data/data/com.termux/files"
 
 # Termux update repos
-termux-change-repo
+#termux-change-repo #not working
 
 # Setup termux storage
 #termux-setup-storage -y
@@ -16,7 +16,7 @@ yes | pkg update && pkg upgrade
 # TERMUX CONFIG ================================================================
 
 #Install config
-cp termux.properties $HOME/.termux/
+mkdir -p $HOME/.termux && cp termux.properties $_/
 termux-reload-settings
 
 # PKG ==========================================================================
@@ -33,7 +33,7 @@ yes | pip install yt-dlp
 #Install script
 mkdir -p $HOME/bin && cp termux-url-opener $_/
 chmod +x "$HOME/bin/termux-url-opener"
-termux-setup-storage -y
+termux-setup-storage
 
 # STARSHIP =====================================================================
 
