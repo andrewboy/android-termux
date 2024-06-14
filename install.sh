@@ -27,7 +27,7 @@ pkg install -y fastfetch bat eza nodejs-lts php mc openssh git nala python pytho
 # TERMUX URL OPENER ============================================================
 
 #Install dependencies
-pkg install python python-pip -y && pkg install ffmpeg -y && pkg install dialog -y
+pkg install python python-pip ffmpeg dialog -y
 yes | pip install yt-dlp
 
 #Install script
