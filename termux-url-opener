@@ -3,13 +3,15 @@
 clear
 url=$1
 download_path="$HOME/storage/downloads/youtube-dl"
+file_name="%(title)s.%(ext)s"
 
-result=$(dialog --clear \
+result=$(dialog \
+--clear \
 --stdout \
---backtitle "Select" \
---title "Select" \
---menu "Choose:" \
-15 60 4 \
+--backtitle "Youtube Downloader" \
+--title "Youtube Downloader" \
+--menu "Choose format:" \
+9 40 4 \
 1 "video" \
 2 "audio");
 
@@ -19,9 +21,9 @@ exitcode=$?;
 [ ! -d "$download_path" ] && mkdir "$download_path"
 
 if [ "$result" == 1 ]; then
-  yt-dlp -c -i "$url" -o "$download_path/%(title)s.%(ext)s"
+  yt-dlp -c -i "$url" -o "$download_path/$file_name"
 elif [ "$result" == 2 ]; then
-  yt-dlp -x --audio-format "mp3" -c -i "$url" -o "$download_path/%(title)s.%(ext)s"
+  yt-dlp -x --audio-format "mp3" -c -i "$url" -o "$download_path/$file_name"
 else
   echo "Unrecognized choice"
 fi
