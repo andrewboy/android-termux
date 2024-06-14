@@ -2,6 +2,7 @@
 
 clear
 url=$1
+download_path="$HOME/storage/downloads/youtube-dl"
 
 result=$(dialog --clear \
 --stdout \
@@ -15,12 +16,12 @@ result=$(dialog --clear \
 exitcode=$?;
 
 #create directory if not exists
-[ ! -d "$HOME/storage/downloads/youtube-dl" ] && mkdir "$HOME/storage/downloads/youtube-dl"
+[ ! -d "$download_path" ] && mkdir "$download_path"
 
 if [ "$result" == 1 ]; then
-  youtube-dl -c -i "$url" -o "$HOME/storage/downloads/youtube-dl/%(title)s.%(ext)s"
+  yt-dlp -c -i "$url" -o "$download_path/%(title)s.%(ext)s"
 elif [ "$result" == 2 ]; then
-  youtube-dl -x --audio-format "mp3" -c -i "$url" -o "$HOME/storage/downloads/youtube-dl/%(title)s.%(ext)s"
+  yt-dlp -x --audio-format "mp3" -c -i "$url" -o "$download_path/%(title)s.%(ext)s"
 else
   echo "Unrecognized choice"
 fi

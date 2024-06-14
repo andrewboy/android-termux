@@ -1,49 +1,64 @@
 #!/bin/bash
 
+# INIT =========================================================================
+
+termux_root="/data/data/com.termux/files"
+
+# Termux update repos
+termux-change-repo
+
+# Setup termux storage
+#termux-setup-storage -y
+
+# Update packages
+yes | pkg update && pkg upgrade
+
 # TERMUX CONFIG ================================================================
 
-#termux config
+#Install config
 cp termux.properties $HOME/.termux/
 termux-reload-settings
 
+# PKG ==========================================================================
+
+pkg install -y fastfetch bat eza nodejs-lts php mc openssh git nala neovim python python-pip
+
 # TERMUX URL OPENER ============================================================
 
-#Clean Install
-rm -f "/data/data/com.termux/files/home/bin/termux-url-opener"
-mkdir /data/data/com.termux/files/home/bin
+#Install dependencies
+pkg install python python-pip -y && pkg install ffmpeg -y
+yes | pip install yt-dlp
 
-#Installing dependencies
-pkg update -y && pkg install python -y && pkg install ffmpeg -y
-yes | pip install youtube-dl
-
-#Installing the script
-cp termux-url-opener $HOME/bin/
+#Install script
+mkdir -p $HOME/bin && cp termux-url-opener $_/
 chmod +x "$HOME/bin/termux-url-opener"
 termux-setup-storage -y
 
+# STARSHIP =====================================================================
+
+pkg install getconf
+curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir $termux_root/usr/bin
+wget -O ~/.termux/font.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Medium/JetBrainsMonoNerdFontMono-Medium.ttf
+starship preset gruvbox-rainbow -o ~/.config/starship.toml
+
 # FISH =========================================================================
 
-#fish + config
 pkg install fish
-#install powerline???
-#pkg install wget
-#wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-#wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-#mkdir ~/.fonts/
-#mv PowerlineSymbols.otf ~/.fonts/
-#mkdir -p ~/.config/fontconfig/conf.d
-#mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
-fish -c "omf install lambda"
-#launch on termux start
+mkdir -p $HOME/.config/fish/conf.d && cp custom.fish $_/
 chsh -s fish
 
-#neofetch
-pkg install neofetch
-#enable neofetch in fish terminal
-cp custom.fish $HOME/.config/fish/conf.d/
-# run at termux start => ~/.config/fish/config.fish
-#if ! grep -Fxq "alias pbcopy='xclip -selection clipboard'" ~/.config/fish/config.fish; then echo 1; else echo 0; fi
+# BASH =========================================================================
 
-# INSTALL PROGRAMS =============================================================
+cp .bashrc $HOME/
 
-pkg update -y && pkg install mc -y && pkg install openssh -y
+# PNPM =========================================================================
+
+npm install -g pnpm
+
+# COMPOSER =====================================================================
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar $termux_root/usr/bin/composer
