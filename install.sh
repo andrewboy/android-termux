@@ -21,19 +21,12 @@ termux-reload-settings
 
 # PKG ==========================================================================
 
-pkg install -y fastfetch bat eza nodejs-lts php mc openssh git nala python python-pip wget
+pkg install -y curl fastfetch bat eza nodejs-lts php mc openssh git nala python python-pip wget
 #neovim
 
 # TERMUX URL OPENER ============================================================
 
-#Install dependencies
-pkg install python python-pip ffmpeg dialog -y
-yes | pip install yt-dlp
-
-#Install script
-mkdir -p $HOME/bin && cp termux-url-opener $_/
-chmod +x "$HOME/bin/termux-url-opener"
-termux-setup-storage
+curl -sSL https://github.com/andrewboy/termux-yt-dl/raw/main/install.sh | bash
 
 # STARSHIP =====================================================================
 
