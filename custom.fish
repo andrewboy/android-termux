@@ -19,14 +19,6 @@ function youtube_download_audio
   yt-dlp -x --audio-format "mp3" -c -i "$url" -o "$download_path/$file_name"
 end
 
-function download_youtube_video
-  set -l url=$argv[1]
-  set -l download_path="$HOME/storage/downloads/youtube-dl"
-  set -l file_name="%(title)s.%(ext)s"
-
-  yt-dlp -c -i "$url" -o "$download_path/$file_name"
-end
-
 starship init fish | source
 
 alias cat="bat"
