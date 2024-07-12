@@ -30,8 +30,7 @@ curl -sSL https://github.com/andrewboy/termux-yt-dl/raw/main/install.sh | bash
 
 # STARSHIP =====================================================================
 
-pkg install getconf
-curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir $termux_root/usr/bin -y
+pkg install starship
 wget -O ~/.termux/font.ttf https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Medium/JetBrainsMonoNerdFontMono-Medium.ttf
 starship preset gruvbox-rainbow -o ~/.config/starship.toml
 

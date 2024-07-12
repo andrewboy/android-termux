@@ -19,11 +19,11 @@ function youtube_download_audio
   yt-dlp -x --audio-format "mp3" -c -i "$url" -o "$download_path/$file_name"
 end
 
-starship init fish | source
-
 alias cat="bat"
 alias lsx="eza --icons --octal-permissions"
 alias ll="lsx -la"
 alias pn="pnpm"
 alias ytdlv="youtube_download_video"
 alias ytdla="youtube_download_audio"
+
+starship init fish | source
