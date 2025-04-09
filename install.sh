@@ -11,7 +11,8 @@ termux_root="/data/data/com.termux/files"
 #termux-setup-storage -y
 
 # Update packages
-yes | pkg update && pkg upgrade
+yes | pkg update && \
+yes | pkg upgrade
 
 # TERMUX CONFIG ================================================================
 
