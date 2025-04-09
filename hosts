@@ -1,0 +1,11 @@
+servers:
+  hosts:
+    local-pc:
+      ansible_host: localhost
+      ansible_connection: local
+
+all:
+  vars:
+    ansible_remote_tmp: $HOME/.ansible/tmp
+    # ansible_local_tmp: $HOME/.ansible/tmp
+    #ansible_python_interpreter: /usr/bin/python3

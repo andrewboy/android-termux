@@ -55,3 +55,16 @@ php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b3
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar $termux_root/usr/bin/composer
+
+# ANSIBLE =====================================================================
+
+yes | pkg upgrade && \
+yes | pkg install \
+    openssl python rust build-essential
+pip install --upgrade pip setuptools wheel
+export CARGO_BUILD_TARGET=aarch64-linux-android
+pip install --upgrade cryptography ansible pywinrm[credssp]
+
+cp .ansible.cfg $HOME/
+cp hosts $HOME/
+cp playbook.yml $HOME/
