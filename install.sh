@@ -54,7 +54,7 @@ fish_file_name="custom.fish"
 
 if ! [ -f $fish_file_name ];
 then
-    curl -sSL -O --output-dir $HOME $github_url/$fish_file_name
+    curl -sSL -O --output-dir $HOME/.config/fish/conf.d $github_url/$fish_file_name
 else
     cp $fish_file_name $_/
 fi
@@ -85,6 +85,8 @@ php -r "unlink('composer-setup.php');"
 mv composer.phar $termux_root/usr/bin/composer
 
 # ANSIBLE =====================================================================
+
+# https://gist.github.com/kuttor/5540b0b7ee18ea62283068b03813693e
 
 yes | pkg upgrade && \
 yes | pkg install \
