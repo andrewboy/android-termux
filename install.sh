@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # INIT =========================================================================
-
+github_url="https://github.com/andrewboy/android-termux/raw/main"
 termux_root="/data/data/com.termux/files"
 
 # Termux update repos
@@ -17,7 +17,17 @@ yes | pkg upgrade
 # TERMUX CONFIG ================================================================
 
 #Install config
-mkdir -p $HOME/.termux && cp termux.properties $_/
+mkdir -p $HOME/.termux
+
+termux_file_name="termux.properties"
+
+if ! [ -f $termux_file_name ];
+then
+    curl -sSL -O --output-dir $HOME $github_url/$termux_file_name
+else
+    cp $termux_file_name $_/
+fi
+
 termux-reload-settings
 
 # PKG ==========================================================================
@@ -38,12 +48,29 @@ starship preset gruvbox-rainbow -o ~/.config/starship.toml
 # FISH =========================================================================
 
 pkg install -y fish
-mkdir -p $HOME/.config/fish/conf.d && cp custom.fish $_/
+mkdir -p $HOME/.config/fish/conf.d
+
+fish_file_name="custom.fish"
+
+if ! [ -f $fish_file_name ];
+then
+    curl -sSL -O --output-dir $HOME $github_url/$fish_file_name
+else
+    cp $fish_file_name $_/
+fi
+
 chsh -s fish
 
 # BASH =========================================================================
 
-cp .bashrc $HOME/
+bash_file_name=".bashrc"
+
+if ! [ -f $bash_file_name ];
+then
+    curl -sSL -O --output-dir $HOME $github_url/$bash_file_name
+else
+    cp $bash_file_name $HOME
+fi
 
 # PNPM =========================================================================
 
@@ -66,6 +93,29 @@ pip install --upgrade pip setuptools wheel
 export CARGO_BUILD_TARGET=aarch64-linux-android
 pip install --upgrade cryptography ansible pywinrm[credssp]
 
-cp .ansible.cfg $HOME/
-cp hosts $HOME/
-cp playbook.yml $HOME/
+ansible_cfg_file_name=".ansible.cfg"
+
+if ! [ -f $ansible_cfg_file_name ];
+then
+    curl -sSL -O --output-dir $HOME $github_url/$ansible_cfg_file_name
+else
+    cp $ansible_cfg_file_name $HOME
+fi
+
+hosts_file_name="hosts"
+
+if ! [ -f $hosts_file_name ];
+then
+    curl -sSL -O --output-dir $HOME $github_url/$hosts_file_name
+else
+    cp $hosts_file_name $HOME
+fi
+
+playbook_file_name="playbook.yml"
+
+if ! [ -f $playbook_file_name ];
+then
+    curl -sSL -O --output-dir $HOME $github_url/$playbook_file_name
+else
+    cp $playbook_file_name $HOME
+fi
