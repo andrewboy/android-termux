@@ -86,6 +86,7 @@ yes | pkg install \
     openssl python rust build-essential
 pip install --upgrade pip setuptools wheel
 export CARGO_BUILD_TARGET=aarch64-linux-android
+set -x ANDROID_API_LEVEL (getprop ro.build.version.sdk)
 pip install --upgrade cryptography ansible pywinrm[credssp]
 
 fetch_cp $github_url ".ansible.cfg" $HOME
